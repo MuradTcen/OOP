@@ -3,7 +3,8 @@
                 а11..а1н
                 ан1.. анн
                 масса яблок рандомна
-    червяк с весами врывается, если ябоко больше, то он сьедает 1/1000
+    червяк с весами врывается, если ябоко больше,
+    то он сьедает 1/1000
     ползет к следующему
     он должеен сьесть Т-яблок
     где остался червяк
@@ -13,8 +14,12 @@
     настройки для распределения масс, размер ящика
     два языка интерфейса
     ингтерфейсные сообщения из файла 
-    TODO:
-    We have a one worm. His name is Garry. He is in a box with apples. He has a weighing-machine. He weigh every apple, if weight of apple more than KRIT_MASS, he eat PART_APPLE procent of apple and will go to next apple until he eat SIZE_EAT.   
+    Technical specification:
+    We have a one worm. His name is Garry.
+    He is in a box with apples. He has a weighing-machine.
+    He weigh every apple, if weight of apple more than KRIT_MASS,
+    he eat PART_APPLE procent of apple and will go to next apple
+    until he eat SIZE_EAT.   
     
 '''
 import random
