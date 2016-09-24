@@ -14,6 +14,8 @@
     настройки для распределения масс, размер ящика
     два языка интерфейса
     ингтерфейсные сообщения из файла 
+    
+    
     Technical specification:
     We have a one worm. His name is Garry.
     He is in a box with apples. He has a weighing-machine.
@@ -27,8 +29,8 @@ import random
 MIN_S_E = 100
 MAX_S_E = 250
 KRIT_MASS = 150
-PART_APPLE = 1/10
-SIZE_EAT=200
+PART_APPLE = 1/15
+SIZE_EAT=100
 M = 10
 N = 5
 Box = []
@@ -56,6 +58,10 @@ class Worm:
      def __init__(self):
         self.eat = 0
         self.place = 0
+        self.full=False
+        
+     def set_full(self):
+        self.full=True
         
      def getEat(self):
         if self.eat < SIZE_EAT:
@@ -64,19 +70,31 @@ class Worm:
             return False
              
      def eating(self,apple):
+        print ('Mass of apple',apple.coord,'is',apple.getSize())
         if apple.getSize() >= KRIT_MASS:
             apple.setEated()
-            self.eat += PART_APPLE*apple.getSize()
-        print ('Worm eat:',apple.coord)
-        print (round(self.eat,2))     
-        
+            if (self.eat+PART_APPLE*apple.getSize())<=SIZE_EAT:
+                self.eat += PART_APPLE*apple.getSize()
+                print ('Worm ate:',apple.coord)
+                print ('Mass of worm is',round(self.eat,2)) 
+            else:
+                self.set_full()  
+
+
      def lifeCycle(self):
-        while (self.getEat()): 
+        while (self.getEat() and not self.full): 
             self.eating()
+            #if self.full==True: return
             self.lifeCycle()
      
            
 def main():
+    print ('Do you want use english? Y/N')
+    inp=input()
+    if inp=='Y': interface=open('eng_interface.txt','r')
+    else: interface=open('rus_interface.txt','r')
+    print (interface.read())
+    
     garry = Worm()
     for i in range(M*N):
         Box.append(Apple(i))
@@ -86,6 +104,8 @@ def main():
             garry.eating(Box[i])
         else: break
         i+=1
+        
+    interface.close()
     #---------------------------
         
 if __name__=="__main__":
